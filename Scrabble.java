@@ -118,9 +118,11 @@ public class Scrabble {
 				break;
 			}
 			if(!isWordInDictionary(input)){
-				System.out.println("No such word in the dictionary. Try again.");
+				System.out.println("Invalid word. Try again.");
 			} else {
-					score+=wordScore(input);
+					int wordPoints = wordScore(input);
+					score+=wordPoints;
+					System.out.println(input + " earned " + wordPoints + " points. Score: " + score + " points");
 					hand=MyString.remove(hand, input);
 			}
 		}
