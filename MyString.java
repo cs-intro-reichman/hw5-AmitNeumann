@@ -49,10 +49,15 @@ public class MyString {
      * @return true is str1 is a subset of str2, false otherwise
      */
     public static boolean subsetOf(String str1, String str2) {
-        if (str2.contains(str1)) {
-            return true;
+        String st1=str1, st2=str2;
+        boolean isSub=true;
+        for(int i=0;i<st1.length()&&isSub;i++){ // runs on the substring
+            if (st2.indexOf(st1.charAt(i))==-1) {
+                isSub=false;
+            }
+            st2=removeCh(st2, st1.charAt(i));
         }
-        return false;
+        return isSub;
     }
 
     /** Returns a string which is the same as the given string, with a space
@@ -64,13 +69,20 @@ public class MyString {
      * @return a string consisting of the characters of str, separated by spaces.
      */
     public static String spacedString(String str) {
-        String spaced="";
-        for(int i=0;i<str.length()-1;i++){
-            if(str.charAt(0)!=' '){
-                spaced+=""+str.charAt(i)+" ";
-            }
+        if(str.equals("")){
+            return str;
         }
-        spaced+=str.charAt(str.length()-1);
+        String spaced="";
+        if (str.length()>1) {
+            for(int i=0;i<str.length()-1;i++){
+                if(str.charAt(0)!=' '){
+                    spaced+=""+str.charAt(i)+" ";
+                }
+            }
+            spaced+=str.charAt(str.length()-1);
+        } else {
+            spaced=str;
+        }
         return spaced;
     }
   
@@ -86,7 +98,7 @@ public class MyString {
      */
     public static String randomStringOfLetters(int n) {
       if(n<1){
-        return null;
+        return "";
       }
         String random="";
         int randomIndex;

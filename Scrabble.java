@@ -48,10 +48,15 @@ public class Scrabble {
 
 	// Checks if the given word is in the dictionary.
 	public static boolean isWordInDictionary(String word) {
-		for(int i=0;i<NUM_OF_WORDS;i++){
-			if(word.equals(DICTIONARY[i])){
-				return true;
+		if(word.isEmpty()){
+			return false;
+		} else {
+			for(int i=0;i<NUM_OF_WORDS;i++){
+				if(word.equalsIgnoreCase(DICTIONARY[i])){
+					return true;
+				}
 			}
+
 		}
 		return false;
 	}
@@ -60,20 +65,26 @@ public class Scrabble {
 	// If the length of the word equals the length of the hand, adds 50 points to the score.
 	// If the word includes the sequence "runi", adds 1000 points to the game.
 	public static int wordScore(String word) {
-		int index,sum=0;
-		char ch;
-		for(int i=0;i<word.length();i++) {
-			ch=word.charAt(i);
-			index=ch-'a';
-			sum+=SCRABBLE_LETTER_VALUES[index];
-			if(ch=='r'||ch=='u'||ch=='n'||ch=='i'){
-				sum+=1000;
+		if (!word.matches("[a-z]+")){
+			return -1;// error
+		} else {
+
+			int index,runiBonus=0,sum=0;
+			char ch;
+			for(int i=0;i<word.length();i++) {
+				ch=word.charAt(i);
+				index=ch-'a';
+				sum+=SCRABBLE_LETTER_VALUES[index];
+				if(ch=='r'||ch=='u'||ch=='n'||ch=='i'){
+					runiBonus++;
+				}
 			}
+			sum=sum*word.length()+runiBonus*1000;
+			if(word.length()==HAND_SIZE){
+				sum+=50;
+			}
+			return sum;
 		}
-		if(word.length()==HAND_SIZE){
-			sum+=50;
-		}
-		return sum;
 	}
 
 	// Creates a random hand of length (HAND_SIZE - 2) and then inserts
