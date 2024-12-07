@@ -48,11 +48,12 @@ public class Scrabble {
 
 	// Checks if the given word is in the dictionary.
 	public static boolean isWordInDictionary(String word) {
-		if(word.isEmpty()){
+		if(word==null || word.isEmpty()){
 			return false;
 		} else {
+			String word1=word.toLowerCase();
 			for(int i=0;i<NUM_OF_WORDS;i++){
-				if(word.equalsIgnoreCase(DICTIONARY[i])){
+				if(word1.equals(DICTIONARY[i].toLowerCase())){
 					return true;
 				}
 			}
@@ -75,11 +76,12 @@ public class Scrabble {
 				ch=word.charAt(i);
 				index=ch-'a';
 				sum+=SCRABBLE_LETTER_VALUES[index];
-				if(ch=='r'||ch=='u'||ch=='n'||ch=='i'){
-					runiBonus++;
-				}
+				
 			}
-			sum=sum*word.length()+runiBonus*1000;
+			sum*=word.length();
+			if(word.contains("r")&&word.contains("u")&&word.contains("n")&&word.contains("i")){
+				sum+=1000;
+			}
 			if(word.length()==HAND_SIZE){
 				sum+=50;
 			}
