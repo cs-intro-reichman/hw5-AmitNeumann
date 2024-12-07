@@ -123,6 +123,7 @@ public class Scrabble {
 					int wordPoints = wordScore(input);
 					score+=wordPoints;
 					System.out.println(input + " earned " + wordPoints + " points. Score: " + score + " points");
+					System.out.println();
 					hand=MyString.remove(hand, input);
 			}
 		}
