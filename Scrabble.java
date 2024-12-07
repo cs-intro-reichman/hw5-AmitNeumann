@@ -48,16 +48,14 @@ public class Scrabble {
 
 	// Checks if the given word is in the dictionary.
 	public static boolean isWordInDictionary(String word) {
-		if(word==null || word.isEmpty()){
+		if (word == null || word.isEmpty()) {
 			return false;
 		} else {
-			String word1=word.toLowerCase();
-			for(int i=0;i<NUM_OF_WORDS;i++){
-				if(word1.equals(DICTIONARY[i].toLowerCase())){
+			for (int i = 0; i < NUM_OF_WORDS; i++) {
+				if (word.equals(DICTIONARY[i])) {
 					return true;
 				}
 			}
-
 		}
 		return false;
 	}
@@ -67,7 +65,7 @@ public class Scrabble {
 	// If the word includes the sequence "runi", adds 1000 points to the game.
 	public static int wordScore(String word) {
 		if (!word.matches("[a-z]+")){
-			return -1;// error
+			return 0;// error
 		} else {
 
 			int index,runiBonus=0,sum=0;
